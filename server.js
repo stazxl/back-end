@@ -10,16 +10,21 @@ const db=require('./app/models/index.js');
 // autoriser les requêtes CORS
 var corsOptions = {
   origin: '*',
+  methods: ['GET','POST','PUT','UPDATE','DELETE'],
 }
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
-require("./app/routes/items.route")(app);
+// parse requests of content-type - application/json
+app.use(express.json());
 
 //Creating/Synchronise database
 db.sequelize.sync({alter:true})
 .catch(error => {
-    console.log(error)
+  console.log(error)
 })
+
+//routes
+require("./app/routes/items.route")(app);
 
 // demarrer serveur et écouter port 5000    
 const PORT = process.env.port || 5000
@@ -27,4 +32,4 @@ const PORT = process.env.port || 5000
 app.listen(PORT, () => {
   console.log('serveur démarré sur le port: '+PORT)
 })
-   
+
