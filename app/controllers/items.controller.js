@@ -5,8 +5,9 @@ const Op = db.Sequelize.Op;
 
 // creé et sauvegarder un nouveeau tuto 
 exports.create = (req, res) => {
+    console.log("data",req.body)
     //valider la requete 
-    if (!req.body.title){
+    if (!req.body){
         res.status(400).send({
             message:"ne peut pas rester vide"
         });
