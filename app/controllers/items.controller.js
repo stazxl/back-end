@@ -13,23 +13,28 @@ exports.create = (req, res) => {
         });
         return;
     }
-   
-    // cree un tuto
+
+    // cree un Items
     const items = {
-        title: req.body.title,
-        description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        idObject:req.body.name+req.body.couleur+req.body.type,
+        color: req.body.color,
+        name: req.body.name,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        type: req.body.type,
     };
 
     // sauvegarder le tuto dans la bdd
     Items.create(items)
     .then(data => {
-        res.send(data);
+        res.status(200).send({
+            message:"Création de l'objet réussi"
+        });
     })
     .catch(err =>
         res.status(500).send({
             message:
-            err.message  || "erreur pendant la création du tutoriel"
+            err.message  || "erreur pendant la création de l'objet"
         })
     );
 };

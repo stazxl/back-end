@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false
+      allowNull: true,     
     },
     idObject :{
       type: DataTypes.STRING,
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     pictureURL:{
       type: DataTypes.STRING,    
-      allowNull: false,     
+      allowNull: true,     
     },
     tag:{
       type: DataTypes.STRING,
