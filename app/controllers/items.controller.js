@@ -1,6 +1,6 @@
 const db = require("../models");
 const Items = db.items;
-const Op = db.Sequilize.Op;
+const Op = db.Sequelize.Op;
 
 
 // creé et sauvegarder un nouveeau tuto 
@@ -38,11 +38,13 @@ exports.findAll = (req,res)=>{
     const title =req.query.title;
     var condition = title ? {title: {[Op.like]: `%${title}%` }} : null;
 
-    Items.FindAll ({
+    Items.findAndCountAll   ({
         where:condition
     })
     .then(data=> {
-        res.send(data);
+        res.header('Access-Control-Expose-Headers','X-Total-Count')
+        res.set('X-Total-Count', data.count)
+        res.send(data.rows);
     })
     .catch(err => {
         res.status(500).send({
@@ -50,8 +52,6 @@ exports.findAll = (req,res)=>{
         });
     });
 };
-    
-
     
 // update tuto
 exports.update = (req,res) => {

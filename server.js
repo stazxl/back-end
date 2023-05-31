@@ -1,6 +1,6 @@
 // importe le paquet express node
 const express = require('express')
-
+const cors = require('cors')
 
 // fait la création d'une application express
 const app = express()
@@ -13,8 +13,18 @@ db.sequelize.sync({alter:true})
     console.log(error)
 })
 
+require("./app/routes/items.route")(app);
+
 // demarrer serveur et écouter port 6000    
-const PORT = process.env.port||6000
+const PORT = process.env.port||5000
 app.listen(PORT, () => {
     console.log('serveur démarré :http://localhost:'+PORT)
 })
+var corsOptions = {
+  origin: '*',
+}
+ app.listen(500, function () {
+  console.log('CORS-enabled web server listening on port 500')
+})
+app.use(cors(corsOptions))
+   
