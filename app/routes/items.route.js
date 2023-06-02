@@ -7,6 +7,9 @@ module.exports = app =>{
 
    //recuperer rour les tutos
    router.get("/",items.findAll);
+   
+   //recuperer rour les tutos
+   router.get("/:id",items.findOne);
 
    //mettre a jour un tuto par id 
    router.put("/:id",items.update);

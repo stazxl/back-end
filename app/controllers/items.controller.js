@@ -41,12 +41,7 @@ exports.create = (req, res) => {
 
 // recuperer tout les tutoriels de la bdd
 exports.findAll = (req,res)=>{
-    const title =req.query.title;
-    var condition = title ? {title: {[Op.like]: `%${title}%` }} : null;
-
-    Items.findAndCountAll   ({
-        where:condition
-    })
+    Items.findAndCountAll()
     .then(data=> {
         res.header('Access-Control-Expose-Headers','X-Total-Count')
         res.set('X-Total-Count', data.count)
@@ -54,61 +49,73 @@ exports.findAll = (req,res)=>{
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || "erreur de récupération des tutoriels"
+            message: err.message || "erreur de récupération des Items"
+        });
+    });
+};
+
+// recuperer un item
+exports.findOne = (req,res)=>{
+
+    Items.findByPk(req.params.id)
+    .then(data=> {
+        res.status(200).send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "erreur de récupération des Items"
         });
     });
 };
     
 // update tuto
 exports.update = (req,res) => {
-    const id = req.param.id;
-    
+    const id = req.body.id;
 
-
-    Tutorial.update(req.body,{
+    Items.update(req.body,{
         where:{id:id}
     })    
-    .them(num => {
+    .then(num => {
         if(num == 1) {
-            res.send({
-                message:"tutoriel mis a jour"
+            res.status(200).send({
+                message:"Items mis a jour"
 
             });
         } else {
             res.send({
-             message: `ne peut pas mettre a jour le tutoriel id=${id}.`    
+             message: `ne peut pas mettre a jour l'item  id=${id}.`    
             });
         }
     })
     .catch(err=> {
         res.status(500).send({
-            message:"erreur de mise a jour de tutoriel avec l'id-" +id
+            message:"erreur de mise a jour de l'item avec l'id-" +id
         });
     });
 };
 
 
-//suprimer un tuto avec une requet spécifique 
+//suprimer un tuto  
 exports.delete = (req,res) => {
     const id = req.params.id;
 
-    Tutorial.destroy({
+    Items.destroy({
         where:{id:id}
     })
     .them(num=> {
         if(num==1) {
-            res.send({
-                mesage:"tutoriel suprimer"
+            res.status(200).send({
+                mesage:"objet suprimer"
             });
         } else {
             res.send({
-                message: ` ne peut pas suprimé le tutoriel id=${id}.`
+                message: ` ne peut pas suprimé l'objet id=${id}.`
             });
         }
     })
     .catch(err => {
     res.status(500).send({
-        message:"ne peut pas suprimer le tutoriel id=" +id
+        message:"ne peut pas trouver l'objet id=" +id
       }); 
     });
 };
