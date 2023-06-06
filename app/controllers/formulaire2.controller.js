@@ -12,30 +12,29 @@ exports.create = (req, res) => {
         });
         return;
     }
+// Créer un nouveau formulaire
 
-   // Créer un nouveau formulaire
-   
     const formulaire2 = {
-      idObject: req.body.email + req.body['intitulé du poste'] + req.body.ville,
-      email: req.body.email,
-      prénom: req.body.prénom,
-      nom: req.body.nom,
-      'numéro de téléphone': req.body['numéro de téléphone'],
-      'intitulé du poste': req.body['intitulé du poste'],
-      'nom de l\'entreprise': req.body['nom de l\'entreprise'],
-      'code postal': req.body['code postal'],
-      ville: req.body.ville,
-      'URL du site web': req.body['URL du site web'],
-      'nombre d\'abonnés': req.body['nombre d\'abonnés'],
-      'nouveaux inscris par mois': req.body['nouveaux inscris par mois'],
-      maladie: req.body.maladie,
-      blessure: req.body.blessure,
-      accident: req.body.accident,
-      'suspension pro': req.body['suspension pro'],
-      'lignes impayées /mois': req.body['lignes impayées /mois'],
-      date: req.body.date,
-      active: req.body.active
-    };
+        idObject: req.body.email + req.body.intitulePoste + req.body.ville,
+        email: req.body.email,
+        prenom: req.body.prenom,
+        nom: req.body.nom,
+        numeroTelephone: req.body.numeroTelephone,
+        intitulePoste: req.body.intitulePoste,
+        nomEntreprise: req.body.nomEntreprise,
+        codePostal: req.body.codePostal,
+        ville: req.body.ville,
+        urlSiteWeb: req.body.urlSiteWeb,
+        nombreAbonnes: req.body.nombreAbonnes,
+        nouveauxInscrisMois: req.body.nouveauxInscrisMois,
+        maladie: req.body.maladie,
+        blessure: req.body.blessure,
+        accident: req.body.accident,
+        suspensionPro: req.body.suspensionPro,
+        lignesImpayeesMois: req.body.lignesImpayeesMois,
+        date: req.body.date,
+        active: req.body.active
+        };
   
     // Sauvegarder le formulaire dans la base de données
     Formulaire2.create(formulaire2)
