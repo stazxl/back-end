@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     }
 
    // Créer un nouveau formulaire
-router.post("/", (req, res) => {
+   
     const formulaire2 = {
       idObject: req.body.email + req.body['intitulé du poste'] + req.body.ville,
       email: req.body.email,
@@ -37,20 +37,6 @@ router.post("/", (req, res) => {
       active: req.body.active
     };
   
-    formulaire2.create(formulaire2)
-      .then(data => {
-        res.status(200).send({
-          message: "Création du formulaire réussie",
-          data: data
-        });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: err.message || "Une erreur s'est produite lors de la création du formulaire"
-        });
-      });
-  });
-
     // Sauvegarder le formulaire dans la base de données
     Formulaire2.create(formulaire2)
         .then(data => {

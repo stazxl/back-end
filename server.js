@@ -1,7 +1,7 @@
 // importe le paquet express node
 const express = require('express')
 const cors = require('cors')
-const formulaire2route = require('./app/routes/formulaire2route');
+
 // fait la création d'une application express
 const app = express()
 
@@ -25,7 +25,7 @@ db.sequelize.sync({alter:true})
 
 //routes
 require("./app/routes/items.route")(app);
-
+const formulaire2route = require('./app/routes/formulaire2route');
 // demarrer serveur et écouter port 5000    
 const PORT = process.env.port || 5000
 
