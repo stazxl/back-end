@@ -18,5 +18,5 @@ module.exports = app => {
     router.delete("/:id", formulaire2.delete);
  
     // Retourner le routeur
-    app.use('/formulaires', router);
+    app.use('/formulaires2', router);
  };
