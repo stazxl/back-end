@@ -1,7 +1,7 @@
 // importe le paquet express node
 const express = require('express')
 const cors = require('cors')
-
+const formulaire2route = require('./app/routes/formulaire2route');
 // fait la création d'une application express
 const app = express()
 

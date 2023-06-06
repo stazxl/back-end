@@ -14,5 +14,5 @@ db.items = require("./items.model.js")(sequelize,DataTypes)
 db.users = require("./users.model.js")(sequelize,DataTypes)
 db.reviews = require("./reviews.model.js")(sequelize,DataTypes)
 db.carts = require("./carts.model.js")(sequelize,DataTypes)
-
+db.formulaire2 = require("./formulaire2.model.js")(sequelize,DataTypes)
 module.exports = db;
