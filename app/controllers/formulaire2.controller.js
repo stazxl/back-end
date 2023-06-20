@@ -27,6 +27,7 @@ exports.create = (req, res) => {
         urlSiteWeb: req.body.urlSiteWeb,
         nombreAbonnes: req.body.nombreAbonnes,
         nouveauxInscrisMois: req.body.nouveauxInscrisMois,
+        valeur$: req.body.valeur$,
         maladie: req.body.maladie,
         blessure: req.body.blessure,
         accident: req.body.accident,

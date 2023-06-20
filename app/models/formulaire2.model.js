@@ -48,30 +48,7 @@ const Formulaire2 = sequelize.define('Formulaire2', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  maladie: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  blessure: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  accident: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  suspensionPro: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  lignesImpayeesMois: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
+
   active: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
