@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const Formulaire2 = sequelize.define('formulaire2', {
     idFormulaire:{
-      type:DataTypes.String,
+      type:DataTypes.STRING,
       unique:true,
       allowNull:false
     },
