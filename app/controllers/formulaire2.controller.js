@@ -1,6 +1,6 @@
 const db = require("../models");
 const Formulaire2 = db.formulaire2;
-const Op = db.Sequelize.Op;
+const TypesAbo = db.typesAbo;
 
 // Créer et sauvegarder un nouveau formulaire
 exports.create = (req, res) => {
@@ -23,32 +23,48 @@ exports.create = (req, res) => {
         intitulePoste: req.body.intitulePoste,
         nomEntreprise: req.body.nomEntreprise,
         codePostal: req.body.codePostal,
+        adresse: req.body.adresse,
         ville: req.body.ville,
         urlSiteWeb: req.body.urlSiteWeb,
         nombreAbonnes: req.body.nombreAbonnes,
         nouveauxInscrisMois: req.body.nouveauxInscrisMois,
-        valeur$: req.body.valeur$,
-        maladie: req.body.maladie,
-        blessure: req.body.blessure,
-        accident: req.body.accident,
+        CasMédicaux: req.body.CasMédicaux,
+        déménagement: req.body.déménagement,
         suspensionPro: req.body.suspensionPro,
         lignesImpayeesMois: req.body.lignesImpayeesMois,
         date: req.body.date,
         active: req.body.active
-        };
+    };
+
+    // console.log(req.body)
+    const idclub = '172';
+    let abo={}
+
+    for(let i =0; i<req.body.abonnement.length; i++){
+        abo={
+            ...req.body.abonnement[i],idclub
+        }
+    }
+
+    console.log(abo)
+
+    // Sauvegarde type dabo dans bdd
+    const abonnement =TypesAbo.create(abo)
   
     // Sauvegarder le formulaire dans la base de données
-    Formulaire2.create(formulaire2)
-        .then(data => {
-            res.status(200).send({
-                message: "Création du formulaire réussie"
-            });
+    const formulaire = Formulaire2.create(formulaire2)
+
+    Promise.all([abonnement,formulaire])
+    .then(values => {
+        res.status(200).send({
+            message: "Création du formulaire réussie"
+        });
+    })
+    .catch(err =>
+        res.status(500).send({
+            message: err.message || "Erreur pendant la création du formulaire"
         })
-        .catch(err =>
-            res.status(500).send({
-                message: err.message || "Erreur pendant la création du formulaire"
-            })
-        );
+    );
 };
 
 // Récupérer tous les formulaires de la base de données
@@ -68,15 +84,20 @@ exports.findAll = (req, res) => {
 
 // Récupérer un formulaire par son ID
 exports.findOne = (req, res) => {
-    Formulaire2.findByPk(req.params.id)
-        .then(data => {
-            res.status(200).send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Erreur de récupération du formulaire"
-            });
+
+    Formulaire2.findByPk(req.params.id,{
+        include:[
+            {model:TypesAbo}
+        ]
+    })
+    .then(data => {
+        res.status(200).send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Erreur de récupération du formulaire"
         });
+    });
 };
 
 // Mettre à jour un formulaire
@@ -109,22 +130,22 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Formulaire2.destroy({
-            where: { id: id }
-        })
-        .then(num => {
-            if (num == 1) {
-                res.status(200).send({
-                    message: "Formulaire supprimé"
-                });
-            } else {
-                res.send({
-                    message: `Ne peut pas supprimer le formulaire avec l'ID ${id}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Ne peut pas trouver le formulaire avec l'ID " + id
+        where: { id: id }
+    })
+    .then(num => {
+        if (num == 1) {
+            res.status(200).send({
+                message: "Formulaire supprimé"
             });
-          });
+        } else {
+            res.send({
+                message: `Ne peut pas supprimer le formulaire avec l'ID ${id}.`
+            });
         }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Ne peut pas trouver le formulaire avec l'ID " + id
+        });
+    });
+}

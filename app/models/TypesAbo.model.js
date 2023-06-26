@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-const TypesAbo = sequelize.define('TypesAbo', {
+const TypesAbo = sequelize.define('typesAbo', {
   
   price: {
     type: DataTypes.INTEGER,
@@ -12,11 +12,11 @@ const TypesAbo = sequelize.define('TypesAbo', {
     type: DataTypes.BOOLEAN,
     allowNull: true,
   },
-  CasMédicaux: {
+  CasMedicaux: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  déménagement: {
+  demenagement: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },

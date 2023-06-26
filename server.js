@@ -26,6 +26,7 @@ db.sequelize.sync({alter:true})
 //routes
 require("./app/routes/items.route")(app);
 require("./app/routes/formulaire2route")(app);
+require("./app/routes/simulations.route")(app);
 
 // demarrer serveur et écouter port 5000    
 const PORT = process.env.port || 5000
