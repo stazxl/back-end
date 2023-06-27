@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 // Créer un nouveau formulaire
 
     const formulaire2 = {
-        idObject: req.body.email + req.body.intitulePoste + req.body.ville,
+        idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
         email: req.body.email,
         prenom: req.body.prenom,
         nom: req.body.nom,
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
         urlSiteWeb: req.body.urlSiteWeb,
         nombreAbonnes: req.body.nombreAbonnes,
         nouveauxInscrisMois: req.body.nouveauxInscrisMois,
-        CasMédicaux: req.body.CasMédicaux,
+        CasMedicaux: req.body.CasMédicaux,
         déménagement: req.body.déménagement,
         suspensionPro: req.body.suspensionPro,
         lignesImpayeesMois: req.body.lignesImpayeesMois,
@@ -48,7 +48,7 @@ exports.create = (req, res) => {
 
     console.log(abo)
 
-    // Sauvegarde type dabo dans bdd
+    // Sauvegarde type d'abo dans bdd
     const abonnement =TypesAbo.create(abo)
   
     // Sauvegarder le formulaire dans la base de données
