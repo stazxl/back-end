@@ -1,6 +1,6 @@
 const db = require("../models");
 const Formulaires = db.formulaires;
-const TypesAbo = db.typesAbo;
+const Abonnements = db.abonnements;
 const Op = db.Sequelize.Op;
 
 
@@ -49,7 +49,7 @@ exports.findOne = (req,res)=>{
 
     Formulaires.findByPk(req.params.id,{
         include:{
-            model:TypesAbo
+            model:Abonnements
         }
     })
     .then(data=> {

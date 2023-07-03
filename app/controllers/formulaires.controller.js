@@ -1,6 +1,6 @@
 const db = require("../models");
 const Formulaires = db.formulaires;
-const TypesAbo = db.typesAbo;
+const Abonnements = db.abonnements;
 
 // Créer et sauvegarder un nouveau formulaire
 exports.create = (req, res) => {
@@ -15,44 +15,34 @@ exports.create = (req, res) => {
 // Créer un nouveau formulaire
 
     const formulaires = {
+        ...req.body,
         idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
-        email: req.body.email,
-        prenom: req.body.prenom,
-        nom: req.body.nom,
-        numeroTelephone: req.body.numeroTelephone,
-        intitulePoste: req.body.intitulePoste,
-        nomEntreprise: req.body.nomEntreprise,
-        codePostal: req.body.codePostal,
-        adresse: req.body.adresse,
-        ville: req.body.ville,
-        urlSiteWeb: req.body.urlSiteWeb,
-        nombreAbonnes: req.body.nombreAbonnes,
-        nouveauxInscrisMois: req.body.nouveauxInscrisMois,
-        CasMedicaux: req.body.CasMédicaux,
-        déménagement: req.body.déménagement,
-        suspensionPro: req.body.suspensionPro,
-        lignesImpayeesMois: req.body.lignesImpayeesMois,
-        date: req.body.date,
-        active: req.body.active
     };
 
-    let abo={}
+    
+    // let abo={}
 
-    for(let i =0; i<req.body.abonnement.length; i++){
-        abo[i]={
-            ...req.body.abonnement[i],
-            idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
-        }
-    }
+    // for(let i =0; i<req.body.abonnement.length; i++){
+    //     abo[i]={
+    //         ...req.body.abonnement[i],
+    //         idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
+    //     }
+    // }
+    // console.log('abo',abo)
 
     // Sauvegarde type d'abo dans bdd
-    const abonnement =TypesAbo.bulkCreate(abo)
+    // const abonnement =Abonnements.bulkCreate(abo)
   
-    // Sauvegarder le formulaire dans la base de données
-    const formulaire = Formulaires.create(formulaires)
+    // // Sauvegarder le formulaire dans la base de données
+    // const formulaire = Formulaires.create(formulaires)
 
-    Promise.all([abonnement,formulaire])
+    // Promise.all([formulaire,abonnement])
+    
+    Formulaires.create(formulaires,{
+        include:Abonnements
+    })
     .then(values => {
+        console.log('values',values)
         res.status(200).send({
             message: "Création du formulaire réussie"
         });
@@ -84,7 +74,7 @@ exports.findOne = (req, res) => {
 
     Formulaires.findByPk(req.params.id,{
         include:[
-            {model:TypesAbo}
+            {model:Abonnements}
         ]
     })
     .then(data => {

@@ -1,13 +1,11 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-const TypesAbo = sequelize.define('typesAbo', {
-  
+const Abonnements = sequelize.define('abonnements', {
   price: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-
   engagement: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
@@ -34,5 +32,5 @@ const TypesAbo = sequelize.define('typesAbo', {
   freezeTableName: true
 });
 
-return TypesAbo;
+return Abonnements;
 };
