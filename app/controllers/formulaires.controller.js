@@ -36,18 +36,17 @@ exports.create = (req, res) => {
         active: req.body.active
     };
 
-    // console.log(req.body)
-    const idclub = '172';
     let abo={}
 
     for(let i =0; i<req.body.abonnement.length; i++){
-        abo={
-            ...req.body.abonnement[i],idclub
+        abo[i]={
+            ...req.body.abonnement[i],
+            idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
         }
     }
 
     // Sauvegarde type d'abo dans bdd
-    const abonnement =TypesAbo.create(abo)
+    const abonnement =TypesAbo.bulkCreate(abo)
   
     // Sauvegarder le formulaire dans la base de données
     const formulaire = Formulaires.create(formulaires)

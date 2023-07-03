@@ -14,8 +14,8 @@ db.users = require("./users.model.js")(sequelize,DataTypes)
 db.formulaires = require("./formulaires.model.js")(sequelize,DataTypes)
 db.typesAbo = require("./typesAbo.model.js")(sequelize,DataTypes)
 
-db.typesAbo.belongsTo(db.formulaires,{source:'idFormulaire'});
-db.formulaires.hasMany(db.typesAbo, { foreignKey: 'uid' });
+db.formulaires.hasMany(db.typesAbo, { foreignKey:{name:'idFormulaire',type:DataTypes.STRING}, sourceKey:'idFormulaire' });
+db.typesAbo.belongsTo(db.formulaires,{targetKey:'idFormulaire',foreignKey: 'idFormulaire'});
 
 
 module.exports = db;
