@@ -1,5 +1,5 @@
 const db = require("../models");
-const Formulaire2 = db.formulaire2;
+const Formulaires = db.formulaires;
 const TypesAbo = db.typesAbo;
 
 // Créer et sauvegarder un nouveau formulaire
@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     }
 // Créer un nouveau formulaire
 
-    const formulaire2 = {
+    const formulaires = {
         idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
         email: req.body.email,
         prenom: req.body.prenom,
@@ -46,13 +46,11 @@ exports.create = (req, res) => {
         }
     }
 
-    console.log(abo)
-
     // Sauvegarde type d'abo dans bdd
     const abonnement =TypesAbo.create(abo)
   
     // Sauvegarder le formulaire dans la base de données
-    const formulaire = Formulaire2.create(formulaire2)
+    const formulaire = Formulaires.create(formulaires)
 
     Promise.all([abonnement,formulaire])
     .then(values => {
@@ -69,7 +67,7 @@ exports.create = (req, res) => {
 
 // Récupérer tous les formulaires de la base de données
 exports.findAll = (req, res) => {
-    Formulaire2.findAndCountAll()
+    Formulaires.findAndCountAll()
         .then(data => {
             res.header('Access-Control-Expose-Headers', 'X-Total-Count');
             res.set('X-Total-Count', data.count);
@@ -85,7 +83,7 @@ exports.findAll = (req, res) => {
 // Récupérer un formulaire par son ID
 exports.findOne = (req, res) => {
 
-    Formulaire2.findByPk(req.params.id,{
+    Formulaires.findByPk(req.params.id,{
         include:[
             {model:TypesAbo}
         ]
@@ -104,7 +102,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.body.id;
 
-    Formulaire2.update(req.body, {
+    Formulaires.update(req.body, {
             where: { id: id }
         })
         .then(num => {
@@ -129,7 +127,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Formulaire2.destroy({
+    Formulaires.destroy({
         where: { id: id }
     })
     .then(num => {

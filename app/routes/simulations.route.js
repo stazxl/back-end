@@ -18,7 +18,7 @@ module.exports = app =>{
     router.delete("/:id",simulations.delete);
  
     //retourne le routeur
-    app.use('/Simulations',router);
+    app.use('/simulations',router);
  };
  
  

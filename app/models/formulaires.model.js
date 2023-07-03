@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  const Formulaire2 = sequelize.define(
-    "formulaire2",
+  const Formulaires = sequelize.define(
+    "formulaires",
     {
       idFormulaire: {
         type: DataTypes.STRING,
@@ -64,5 +64,5 @@ module.exports = (sequelize, DataTypes) => {
     },
     { sequelize, freezeTableName: true }
   );
-  return Formulaire2;
+  return Formulaires;
 };

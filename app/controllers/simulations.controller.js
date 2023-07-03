@@ -1,5 +1,5 @@
 const db = require("../models");
-const Formulaire2 = db.formulaire2;
+const Formulaires = db.formulaires;
 const TypesAbo = db.typesAbo;
 const Op = db.Sequelize.Op;
 
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     }
 
     // sauvegarder le tuto dans la bdd
-    Formulaire2.create(req.body)
+    Formulaires.create(req.body)
     .then(data => {
         res.status(200).send({
             message:"Création de l'objet réussi"
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 
 // recuperer tout les tutoriels de la bdd
 exports.findAll = (req,res)=>{
-    Formulaire2.findAndCountAll()
+    Formulaires.findAndCountAll()
     .then(data=> {
         res.header('Access-Control-Expose-Headers','X-Total-Count')
         res.set('X-Total-Count', data.count)
@@ -39,7 +39,7 @@ exports.findAll = (req,res)=>{
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || "erreur de récupération des Formulaire2"
+            message: err.message || "erreur de récupération des Formulaires"
         });
     });
 };
@@ -47,7 +47,7 @@ exports.findAll = (req,res)=>{
 // recuperer un item
 exports.findOne = (req,res)=>{
 
-    Formulaire2.findByPk(req.params.id,{
+    Formulaires.findByPk(req.params.id,{
         include:{
             model:TypesAbo
         }
@@ -57,7 +57,7 @@ exports.findOne = (req,res)=>{
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || "erreur de récupération des Formulaire2"
+            message: err.message || "erreur de récupération des Formulaires"
         });
     });
 };
@@ -66,13 +66,13 @@ exports.findOne = (req,res)=>{
 exports.update = (req,res) => {
     const id = req.body.id;
 
-    Formulaire2.update(req.body,{
+    Formulaires.update(req.body,{
         where:{id:id}
     })    
     .then(num => {
         if(num == 1) {
             res.status(200).send({
-                message:"Formulaire2 mis a jour"
+                message:"Formulaires mis a jour"
 
             });
         } else {
@@ -93,7 +93,7 @@ exports.update = (req,res) => {
 exports.delete = (req,res) => {
     const id = req.params.id;
 
-    Formulaire2.destroy({
+    Formulaires.destroy({
         where:{id:id}
     })
     .them(num=> {

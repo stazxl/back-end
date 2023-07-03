@@ -18,14 +18,13 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 //Creating/Synchronise database
-db.sequelize.sync({alter:true})
+db.sequelize.sync()
 .catch(error => {
   console.log(error)
 })
 
 //routes
-require("./app/routes/items.route")(app);
-require("./app/routes/formulaire2route")(app);
+require("./app/routes/formulaires.route")(app);
 require("./app/routes/simulations.route")(app);
 
 // demarrer serveur et écouter port 5000    
