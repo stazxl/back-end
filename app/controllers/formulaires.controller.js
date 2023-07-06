@@ -19,7 +19,6 @@ exports.create = (req, res) => {
         idFormulaire: req.body.email + req.body.intitulePoste + req.body.ville,
     };
 
-    
     // let abo={}
 
     // for(let i =0; i<req.body.abonnement.length; i++){

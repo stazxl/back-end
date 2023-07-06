@@ -13,6 +13,7 @@ db.sequelize = sequelize;
 db.users = require("./users.model.js")(sequelize,DataTypes)
 db.formulaires = require("./formulaires.model.js")(sequelize,DataTypes)
 db.abonnements = require("./abonnements.model.js")(sequelize,DataTypes)
+db.settings = require("./settings.model.js")(sequelize,DataTypes)
 
 db.formulaires.hasMany(db.abonnements, { foreignKey:{name:'idFormulaire',type:DataTypes.STRING}, sourceKey:'idFormulaire' });
 db.abonnements.belongsTo(db.formulaires,{targetKey:'idFormulaire',foreignKey: 'idFormulaire'});

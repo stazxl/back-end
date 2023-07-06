@@ -26,6 +26,38 @@ const Abonnements = sequelize.define('abonnements', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  début_CasMedicaux:{
+    type: DataTypes.INTEGER,   
+    allowNull: false
+  },
+  début_demenagement :{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  début_lignesImpayeesMois:{
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+ début_suspensionPro :{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  dureé_CasMedicaux:{
+    type: DataTypes.INTEGER, 
+    allowNull: false
+  },
+  dureé_demenagement :{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  dureé_lignesImpayeesMois:{
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  dureé_suspensionPro:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 },
 
 {sequelize,
